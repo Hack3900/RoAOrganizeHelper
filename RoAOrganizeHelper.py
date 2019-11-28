@@ -2,17 +2,22 @@ if(str(input("nothing for hex->text, 'th' for text to hex "))!="th"):#choose bet
     exec('b = open(r%s,"r").read()' % input("raw hex file "))#save inputted file to variable (b)
     b = list(b) #make b a list to be able to del items later on
     c="" #initialize c
-    a={'00': '\n', '5C': '\\', 'A6': '<', '11': '>', '3A': ':', '20': ' ', '21': '!', '23': '#', '24': '$', '25': '%', '26': '&', '27': "'", '28': '(', '29': ')', '2A': '*', '2B': '+', '2C': ',', '2D': '-', '2E': '.', '2F': '/', '30': '0', '31': '1', '32': '2', '33': '3', '34': '4', '35': '5', '36': '6', '37': '7', '38': '8', '39': '9', '3B': ';', '3D': '=', '3F': '?', '40': '@', '41': 'A', '42': 'B', '43': 'C', '44': 'D', '45': 'E', '46': 'F', '47': 'G', '48': 'H', '49': 'I', '4A': 'J', '4B': 'K', '4C': 'L', '4D': 'M', '4E': 'N', '4F': 'O', '50': 'P', '51': 'Q', '52': 'R', '53': 'S', '54': 'T', '55': 'U', '56': 'V', '57': 'W', '58': 'X', '59': 'Y', '5A': 'Z', '5B': '[', '5D': ']', '5E': '^', '5F': '_', '60': '`', '61': 'a', '62': 'b', '63': 'c', '64': 'd', '65': 'e', '66': 'f', '67': 'g', '68': 'h', '69': 'i', '6A': 'j', '6B': 'k', '6C': 'l', '6D': 'm', '6E': 'n', '6F': 'o', '70': 'p', '71': 'q', '72': 'r', '73': 's', '74': 't', '75': 'u', '76': 'v', '77': 'w', '78': 'x', '79': 'y', '7A': 'z', '7B': '{', '7C': '|', '7D': '}', '7E': '~'} #a is a dictionary that's used to translate hex<->text
+    a={'00': '\n', '5C': '\\', 'B0': '<', '12': '>', '3A': ':', '20': ' ', '21': '!', '23': '#', '24': '$', '25': '%', '26': '&', '27': "'", '28': '(', '29': ')', '2A': '*', '2B': '+', '2C': ',', '2D': '-', '2E': '.', '2F': '/', '30': '0', '31': '1', '32': '2', '33': '3', '34': '4', '35': '5', '36': '6', '37': '7', '38': '8', '39': '9', '3B': ';', '3D': '=', '3F': '?', '40': '@', '41': 'A', '42': 'B', '43': 'C', '44': 'D', '45': 'E', '46': 'F', '47': 'G', '48': 'H', '49': 'I', '4A': 'J', '4B': 'K', '4C': 'L', '4D': 'M', '4E': 'N', '4F': 'O', '50': 'P', '51': 'Q', '52': 'R', '53': 'S', '54': 'T', '55': 'U', '56': 'V', '57': 'W', '58': 'X', '59': 'Y', '5A': 'Z', '5B': '[', '5D': ']', '5E': '^', '5F': '_', '60': '`', '61': 'a', '62': 'b', '63': 'c', '64': 'd', '65': 'e', '66': 'f', '67': 'g', '68': 'h', '69': 'i', '6A': 'j', '6B': 'k', '6C': 'l', '6D': 'm', '6E': 'n', '6F': 'o', '70': 'p', '71': 'q', '72': 'r', '73': 's', '74': 't', '75': 'u', '76': 'v', '77': 'w', '78': 'x', '79': 'y', '7A': 'z', '7B': '{', '7C': '|', '7D': '}', '7E': '~'} #a is a dictionary that's used to translate hex<->text
     while (b!=[]):#the loop checks the first two items, compares them to the list in the dictionary and then deletes them, once every item has been checked the list is empty
-        c+=a[b[0]+b[1]]s
+        c+=a[b[0]+b[1]]
         del b[1]
         del b[0]
     open("RoAOrganizer.RoAText","w+").write(c) #create RoaText file
     for line in open("RoAOrganizer.RoAText","r"): #open RoaText
+        etest=""#helps finding unnamed characters by having an empty variable if no name has been found
         for lin in open(str(line)[0:len(line)-1].lstrip(">-<")+"/config.ini","r"): #use each line of RoAText to find the config.ini and print the name by looking for a line starting with 'name'
             if(lin[0:4]=="name"):
-                print(lin[6:-2])
-    
+                etest = lin[6:-2]
+        if(etest==""):
+            print("unnamed")
+        else:
+            print(etest)
+
 else:
     b = open("RoAOrganizer.RoAText","r").read() #save the RoaText to b
     b = list(b) #make b a list for use of del later on (can probably skip the line right before)
