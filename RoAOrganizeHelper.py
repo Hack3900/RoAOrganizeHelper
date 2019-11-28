@@ -25,7 +25,7 @@ while (b!=[]):#the loop checks the first two items, compares them to the list in
     except IndexError:
         pass
     del b[0]
-print(a)
+
 
 open("RoAOrganizer.RoAText","w+").write(c) #create RoaText file
 for line in open("RoAOrganizer.RoAText","r"): #open RoaText
